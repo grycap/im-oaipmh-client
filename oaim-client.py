@@ -3,7 +3,7 @@ from lxml import etree
 from oaipmh_scythe import Scythe
 
 
-IM_ENDPOINT = 'https://appsgrycap.i3m.upv.es/im-oai/oai'
+IM_ENDPOINT = 'https://deploy.sandbox.eosc-beyond.eu/im-oai/oai'
 
 
 def fetch_data_from_scythe(func, *args, **kwargs):
