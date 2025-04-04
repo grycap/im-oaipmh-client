@@ -7,9 +7,13 @@ def fetch_data_from_scythe(im_endpoint, func, *args, **kwargs):
     """Fetch data from Scythe."""
     try:
         with Scythe(im_endpoint) as scythe:
-            return func(scythe, *args, **kwargs)
+            result = func(scythe, *args, **kwargs)
+            # Force generator evaluation to catch errors early
+            if hasattr(result, '__iter__') and not isinstance(result, (str, bytes, dict)):
+                return list(result)
+            return result
     except Exception as e:
-        print(f"Repository response: {e}")
+        print(f"{type(e).__name__}: {e}")
         return None
 
 
@@ -44,7 +48,7 @@ def list_identifiers(im_endpoint, metadata_prefix, from_date=None, until=None, s
     if identifiers:
         print("\nIdentifiers:")
         for identifier in identifiers:
-            print(etree.tostring(identifier, pretty_print=True, encoding="unicode"))
+            print(etree.tostring(identifier.xml, pretty_print=True, encoding="unicode"))
 
 
 def list_sets(im_endpoint):
@@ -53,7 +57,7 @@ def list_sets(im_endpoint):
     if sets:
         print("List sets:")
         for set_item in sets:
-            print(etree.tostring(set_item, pretty_print=True, encoding="unicode"))
+            print(etree.tostring(set_item.xml, pretty_print=True, encoding="unicode"))
 
 
 def get_record(im_endpoint, identifier, metadata_prefix):
@@ -64,7 +68,7 @@ def get_record(im_endpoint, identifier, metadata_prefix):
     )
     if record:
         print("Get record:")
-        print(etree.tostring(record, pretty_print=True, encoding="unicode"))
+        print(etree.tostring(record.xml, pretty_print=True, encoding="unicode"))
 
 
 def list_records(im_endpoint, metadata_prefix, from_date=None, until=None, set_name=None):
@@ -81,7 +85,7 @@ def list_records(im_endpoint, metadata_prefix, from_date=None, until=None, set_n
     if records:
         print("List records:")
         for record in records:
-            print(etree.tostring(record, pretty_print=True, encoding="unicode"))
+            print(etree.tostring(record.xml, pretty_print=True, encoding="unicode"))
 
 
 def get_arg_parser():
