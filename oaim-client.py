@@ -5,87 +5,98 @@ from oaipmh_scythe import Scythe
 
 def fetch_data_from_scythe(im_endpoint, func, *args, **kwargs):
     """Fetch data from Scythe."""
-    try:
-        with Scythe(im_endpoint) as scythe:
-            result = func(scythe, *args, **kwargs)
-            # Force generator evaluation to catch errors early
-            if hasattr(result, '__iter__') and not isinstance(result, (str, bytes, dict)):
-                return list(result)
-            return result
-    except Exception as e:
-        print(f"{type(e).__name__}: {e}")
-        return None
+    with Scythe(im_endpoint) as scythe:
+            return func(scythe, *args, **kwargs)
 
 
 def identify(im_endpoint):
     """Harvest repository identity information."""
-    identify_response = fetch_data_from_scythe(im_endpoint, lambda scythe: scythe.identify())
-    if identify_response:
-        print("Identify response:")
-        print(etree.tostring(identify_response.xml, pretty_print=True, encoding="unicode"))
+    try:
+        identify_response = fetch_data_from_scythe(im_endpoint, lambda scythe: scythe.identify())
+        if identify_response:
+            print("Identify response:")
+            print(etree.tostring(identify_response.xml, pretty_print=True, encoding="unicode"))
+    except Exception as e:
+        print(f"{type(e).__name__}: {e}")
 
 
 def list_metadata_formats(im_endpoint, identifier=None):
     """Harvest available metadata formats."""
-    metadata_formats = fetch_data_from_scythe(im_endpoint, lambda scythe: scythe.list_metadata_formats(identifier))
-    if metadata_formats:
-        print("\nMetadata formats:")
-        for metadata_format in metadata_formats:
-            print(etree.tostring(metadata_format.xml, pretty_print=True, encoding="unicode"))
+    try:
+        metadata_formats = fetch_data_from_scythe(im_endpoint, lambda scythe: scythe.list_metadata_formats(identifier))
+        if metadata_formats:
+            print("\nMetadata formats:")
+            for metadata_format in metadata_formats:
+                print(etree.tostring(metadata_format.xml, pretty_print=True, encoding="unicode"))
+    except Exception as e:
+        print(f"{type(e).__name__}: {e}")
 
 
 def list_identifiers(im_endpoint, metadata_prefix, from_date=None, until=None, set_name=None):
     """Harvest available identifiers."""
-    identifiers = fetch_data_from_scythe(
-        im_endpoint,
-        lambda scythe: scythe.list_identifiers(
-            metadata_prefix=metadata_prefix,
-            from_=from_date,
-            until=until,
-            set_=set_name
+    try:
+        identifiers = fetch_data_from_scythe(
+            im_endpoint,
+            lambda scythe: scythe.list_identifiers(
+                metadata_prefix=metadata_prefix,
+                from_=from_date,
+                until=until,
+                set_=set_name
+            )
         )
-    )
-    if identifiers:
-        print("\nIdentifiers:")
-        for identifier in identifiers:
-            print(etree.tostring(identifier.xml, pretty_print=True, encoding="unicode"))
+        if identifiers:
+            print("\nIdentifiers:")
+            for identifier in identifiers:
+                print(etree.tostring(identifier.xml, pretty_print=True, encoding="unicode"))
+    except Exception as e:
+        print(f"{type(e).__name__}: {e}")
 
 
 def list_sets(im_endpoint):
     """Harvest available sets."""
-    sets = fetch_data_from_scythe(im_endpoint, lambda scythe: scythe.list_sets())
-    if sets:
-        print("List sets:")
-        for set_item in sets:
-            print(etree.tostring(set_item.xml, pretty_print=True, encoding="unicode"))
+    try:
+        sets = fetch_data_from_scythe(im_endpoint, lambda scythe: scythe.list_sets())
+        if sets:
+            print("List sets:")
+            for set_item in sets:
+                print(etree.tostring(set_item.xml, pretty_print=True, encoding="unicode"))
+    except Exception as e:
+        print(f"{type(e).__name__}: {e}")
 
 
 def get_record(im_endpoint, identifier, metadata_prefix):
     """Harvest a specific record."""
-    record = fetch_data_from_scythe(
-        im_endpoint,
-        lambda scythe: scythe.get_record(identifier=identifier, metadata_prefix=metadata_prefix)
-    )
-    if record:
-        print("Get record:")
-        print(etree.tostring(record.xml, pretty_print=True, encoding="unicode"))
+    try:
+        record = fetch_data_from_scythe(
+            im_endpoint,
+            lambda scythe: scythe.get_record(identifier=identifier, metadata_prefix=metadata_prefix)
+        )
+        if record:
+            print("Get record:")
+            print(etree.tostring(record.xml, pretty_print=True, encoding="unicode"))
+    except Exception as e:
+        print(f"{type(e).__name__}: {e}")
 
 
 def list_records(im_endpoint, metadata_prefix, from_date=None, until=None, set_name=None):
     """Harvest all records."""
-    records = fetch_data_from_scythe(
-        im_endpoint,
-        lambda scythe: scythe.list_records(
-            from_=from_date,
-            until=until,
-            metadata_prefix=metadata_prefix,
-            set_=set_name
+    try:
+        records = fetch_data_from_scythe(
+            im_endpoint,
+            lambda scythe: scythe.list_records(
+                from_=from_date,
+                until=until,
+                metadata_prefix=metadata_prefix,
+                set_=set_name
+            )
         )
-    )
-    if records:
-        print("List records:")
-        for record in records:
-            print(etree.tostring(record.xml, pretty_print=True, encoding="unicode"))
+        if records:
+            print("List records:")
+            for record in records:
+                print(etree.tostring(record.xml, pretty_print=True, encoding="unicode"))
+    except Exception as e:
+        print(f"{type(e).__name__}: {e}")
+
 
 
 def get_arg_parser():
