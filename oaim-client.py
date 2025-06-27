@@ -1,3 +1,20 @@
+# IM - Infrastructure Manager
+# Copyright (C) 2025 - GRyCAP - Universitat Politecnica de Valencia
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+
 import argparse
 from lxml import etree
 from oaipmh_scythe import Scythe
@@ -6,7 +23,7 @@ from oaipmh_scythe import Scythe
 def fetch_data_from_scythe(im_endpoint, func, *args, **kwargs):
     """Fetch data from Scythe."""
     with Scythe(im_endpoint) as scythe:
-            return func(scythe, *args, **kwargs)
+        return func(scythe, *args, **kwargs)
 
 
 def identify(im_endpoint):
@@ -96,7 +113,6 @@ def list_records(im_endpoint, metadata_prefix, from_date=None, until=None, set_n
                 print(etree.tostring(record.xml, pretty_print=True, encoding="unicode"))
     except Exception as e:
         print(f"{type(e).__name__}: {e}")
-
 
 
 def get_arg_parser():
