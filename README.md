@@ -43,7 +43,7 @@ The script supports various commands through the command line interface (CLI). B
 Retrieve repository identity information.
 
     ```bash
-    python3 oaim-client.py --im-endpoint <im_endpoint> identify
+    python3 oaim_client.py --im-endpoint <im_endpoint> identify
     ```
 
 
@@ -51,7 +51,7 @@ Retrieve repository identity information.
 Retrieve all available metadata formats in the repository.
 
     ```bash
-    python3 oaim-client.py --im-endpoint <im_endpoint> list_metadata_formats [identifier]
+    python3 oaim_client.py --im-endpoint <im_endpoint> list_metadata_formats [identifier]
     ```
     - `identifier`: Optional. Specify the record identifier to filter the metadata formats.
 
@@ -60,7 +60,7 @@ Retrieve all available metadata formats in the repository.
 Retrieve all available record identifiers in the repository.
 
     ```bash
-    python3 oaim-client.py --im-endpoint <im_endpoint> list_identifiers <metadata_prefix> [--from <from_date>] [--until <until_date>] [--set <set_name>]
+    python3 oaim_client.py --im-endpoint <im_endpoint> list_identifiers <metadata_prefix> [--from <from_date>] [--until <until_date>] [--set <set_name>]
     ```
 
     - `metadata_prefix`: Required. The metadata prefix (e.g., oai_dc).
@@ -75,14 +75,14 @@ Retrieve all available record identifiers in the repository.
 Retrieve the set structure of the repository.
 
     ```bash
-    python3 oaim-client.py --im-endpoint <im_endpoint> list_sets
+    python3 oaim_client.py --im-endpoint <im_endpoint> list_sets
     ```
 
 5. **get_record**  
 Retrieve a specific record from the repository.
 
     ```bash
-    python3 oaim-client.py --im-endpoint <im_endpoint> get_record <identifier> <metadata_prefix>
+    python3 oaim_client.py --im-endpoint <im_endpoint> get_record <identifier> <metadata_prefix>
     ```
 
     - `identifier`: Required. The identifier of the record to retrieve.
@@ -93,7 +93,7 @@ Retrieve a specific record from the repository.
 Retrieve all records available in the repository.
 
     ```bash
-    python3 oaim-client.py --im-endpoint <im_endpoint> list_records <metadata_prefix> [--from <from_date>] [--until <until_date>] [--set <set_name>]
+    python3 oaim_client.py --im-endpoint <im_endpoint> list_records <metadata_prefix> [--from <from_date>] [--until <until_date>] [--set <set_name>]
     ```
 
     - `metadata_prefix`: Required. The metadata prefix (e.g., oai_dc).
@@ -109,17 +109,17 @@ Retrieve all records available in the repository.
 To retrieve repository identity information:
 
 ```bash
-python3 oaim-client.py --im-endpoint <im_endpoint> identify
+python3 oaim_client.py --im-endpoint <im_endpoint> identify
 ```
 
 To list available metadata formats for a specific identifier:
 
 ```bash
-python3 oaim-client.py --im-endpoint <im_endpoint> list_metadata_formats
+python3 oaim_client.py --im-endpoint <im_endpoint> list_metadata_formats
 ```
 
 To retrieve all records with metadata prefix oai_dc:
 
 ```bash
-python3 oaim-client.py --im-endpoint <im_endpoint> list_records oai_dc --from 2020-01-21
+python3 oaim_client.py --im-endpoint <im_endpoint> list_records oai_dc --from 2020-01-21
 ```
