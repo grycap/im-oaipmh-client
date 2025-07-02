@@ -22,7 +22,7 @@ This Python client is designed to interact with the **Infrastructure Manager (IM
 You can install the required dependencies using `pip`:
 
 ```bash
-pip install lxml oaipmh_scythe
+pip install -r requirements.txt
 ```
 
 

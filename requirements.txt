@@ -1,0 +1,2 @@
+lxml>=5.2.1
+oaipmh_scythe>=0.13.0
