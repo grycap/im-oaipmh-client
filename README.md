@@ -1,6 +1,8 @@
 # OAI-PMH Client for Infrastructure Manager (IM)
 
-This Python client is designed to interact with the **Infrastructure Manager (IM)** repository via the **OAI-PMH (Open Archives Initiative Protocol for Metadata Harvesting)** interface. It provides various commands to harvest metadata, including repository information, available identifiers, metadata formats, sets, and records.
+This Python client is designed to interact with the [**Infrastructure Manager (IM)**](https://www.grycap.upv.es/im/) repository via the [**OAI-PMH (Open Archives Initiative Protocol for Metadata Harvesting)**](https://www.openarchives.org/pmh/) interface, to harvest the available TOSCA templates than can be deployed with a particular IM instance. 
+
+It provides various commands to harvest metadata, including repository information, available identifiers, metadata formats, sets, and records.
 
 
 ## Features
@@ -106,6 +108,11 @@ Retrieve all records available in the repository.
 
 
 ## Example
+
+In the EOSC Core Innovation Sandbox by EOSC Beyond an IM instance with the OAI-PMH support is available, you can use it in your tests:
+
+http://deploy.sandbox.eosc-beyond.eu/im-oai/oai
+
 To retrieve repository identity information:
 
 ```bash
